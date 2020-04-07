@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "project_name"
+version = "0.1.0"
+description = "description"
+readme = "README.md"
+authors = ["dude"]
+packages = [
+  { include = "project"},
+]
+
+
+[tool.poetry.dependencies]
+python = "^3.7"
+pandas = ">=0"
+numpy = "^1.18.1"
+matplotlib = "^3.2.1"
+# joblib = "^0.14.1"
+# h3 = "^3.4.3"
+# pandarallel = "^1.4.6"
+# plaidml-keras = "^0.7.0"
+# keras = "^2.2.4"
+# tensorflow = "^2.1.0"
+
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.0.1"
+pytest-cov = "^2.7"
+black = "19.3b0"
+pre-commit = "^1.18"
+ipython = "^7.13.0"
+plaidbench = "^0.7.0"
+ipykernel = "^5.2.0"
+
+[tool.black]
+line-length = 120
+
+[build-system]
+requires = ["poetry>=1.0.0"]
+build-backend = "poetry.masonry.api"
