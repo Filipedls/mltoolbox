@@ -37,15 +37,34 @@ RUN pip install --quiet poetry
 COPY project ./project
 COPY pyproject.toml README.md poetry.lock ./
 RUN POETRY_VIRTUALENVS_CREATE=false poetry install --no-interaction --no-ansi --no-dev
-# JUPYTERLAB
-# dir ref in makefile
-RUN mkdir /app/jupyter
-RUN pip install --quiet jupyterlab
-# ipython config dir = get_ipython().profile_dir.startup_dir - allows nb imports startup
-COPY .docker_configs/ipython /root/.ipython/
-RUN ./setup_scripts/jupyter_extensions_script.sh
 
-# LAUNCH JUPYETR LAB
-WORKDIR jupyter
+# JUPYTERLAB ==2.1.0
+# dir ref in makefile
+#RUN mkdir /app/jupyter
+#RUN pip install --quiet jupyterlab
+## ipython config dir = get_ipython().profile_dir.startup_dir - allows nb imports startup
+#COPY .docker_configs/ipython /root/.ipython/
+#RUN ./setup_scripts/jupyter_extensions_script.sh
+#
+## LAUNCH JUPYETR LAB
+#WORKDIR jupyter
+#EXPOSE 8888
+#CMD ["jupyter", "lab", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
+
+# https://github.com/amineHY/docker-streamlit-app/blob/master/Dockerfile
+# --------------- Configure Streamlit ---------------
+RUN pip install --quiet streamlit
+RUN mkdir -p /root/.streamlit
+
+RUN bash -c 'echo -e "\
+	[server]\n\
+	enableCORS = false\n\
+	" > /root/.streamlit/config.toml'
+
 EXPOSE 8888
-CMD ["jupyter", "lab", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
+
+# --------------- Export envirennement variable ---------------
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+
+CMD ["streamlit", "run", "--browser.serverAddress", "0.0.0.0", "--server.port", "8888", "project/streamlit_sample.py"]

@@ -28,15 +28,15 @@ run:
 
 .PHONY: ipykernel
 ipykernel:
-	(source .venv/bin/activate; python -m ipykernel install --user --name=hexs_convs;)
+	(source .venv/bin/activate; python -m ipykernel install --user --name=mltoolbox;)
 
 .PHONY: docker
 docker: docker-build docker-run
 
 .PHONY: docker-build
 docker-build:
-	docker build -t hexs_convs .
+	docker build -t mltoolbox .
 
 .PHONY: docker-run
 docker-run:
-	docker run -t -i -p8888:8888 -v '$(PWD)':'/app/jupyter/' hexs_convs
+	docker run -t -i -p8888:8888 -v '$(PWD)':'/app/jupyter/' mltoolbox

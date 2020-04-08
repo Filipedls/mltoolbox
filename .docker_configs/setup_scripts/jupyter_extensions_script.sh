@@ -42,12 +42,15 @@ pip install jupytext --upgrade --quiet
 pip install qgrid --quiet
 jupyter nbextension enable --py --sys-prefix qgrid
 
-# pylantern
+# pylantern - some exts are not sported on v2.1.0
 #pip install pylantern --quiet
 #jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build
-# jupyterlab_bokeh - not sup jupyterlab
+#jupyterlab_bokeh - not sup jupyterlab
+#pip install --quiet bokeh jupyter_bokeh
+#jupyter labextension install @bokeh/jupyter_bokeh --no-build
 #jupyter labextension install plotlywidget qgrid ipysheet lineup_widget --no-build
 #jupyter labextension install @jupyterlab/plotly-extension --no-build
 #jupyter labextension install @jpmorganchase/perspective-jupyterlab --no-build
+
 
 jupyter lab build
