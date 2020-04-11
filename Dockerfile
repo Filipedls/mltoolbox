@@ -36,35 +36,37 @@ RUN chmod +x --recursive setup_scripts/
 RUN pip install --quiet poetry
 COPY project ./project
 COPY pyproject.toml README.md poetry.lock ./
-RUN POETRY_VIRTUALENVS_CREATE=false poetry install --no-interaction --no-ansi --no-dev
+# RUN POETRY_VIRTUALENVS_CREATE=false poetry install --no-interaction --no-ansi --no-dev
 
 # JUPYTERLAB ==2.1.0
 # dir ref in makefile
-#RUN mkdir /app/jupyter
-#RUN pip install --quiet jupyterlab
-## ipython config dir = get_ipython().profile_dir.startup_dir - allows nb imports startup
-#COPY .docker_configs/ipython /root/.ipython/
-#RUN ./setup_scripts/jupyter_extensions_script.sh
-#
-## LAUNCH JUPYETR LAB
-#WORKDIR jupyter
-#EXPOSE 8888
-#CMD ["jupyter", "lab", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
+RUN mkdir /app/jupyter
+RUN pip install --quiet jupyterlab
+# ipython config dir = get_ipython().profile_dir.startup_dir - allows nb imports startup
+COPY .docker_configs/jupyter /root/.jupyter/
+COPY .docker_configs/ipython /root/.ipython/
+RUN ./setup_scripts/jupyter_extensions_script.sh
+RUN ./setup_scripts/jupyter_tools.sh
+
+# LAUNCH JUPYETR LAB
+WORKDIR jupyter
+EXPOSE 8888
+CMD ["jupyter", "lab", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root", "--NotebookApp.token=''"]
 
 # https://github.com/amineHY/docker-streamlit-app/blob/master/Dockerfile
 # --------------- Configure Streamlit ---------------
-RUN pip install --quiet streamlit
-RUN mkdir -p /root/.streamlit
-
-RUN bash -c 'echo -e "\
-	[server]\n\
-	enableCORS = false\n\
-	" > /root/.streamlit/config.toml'
-
-EXPOSE 8888
-
-# --------------- Export envirennement variable ---------------
-ENV LC_ALL=C.UTF-8
-ENV LANG=C.UTF-8
-
-CMD ["streamlit", "run", "--browser.serverAddress", "0.0.0.0", "--server.port", "8888", "project/streamlit_sample.py"]
+#RUN pip install --quiet streamlit
+#RUN mkdir -p /root/.streamlit
+#
+#RUN bash -c 'echo -e "\
+#	[server]\n\
+#	enableCORS = false\n\
+#	" > /root/.streamlit/config.toml'
+#
+#EXPOSE 8888
+#
+## --------------- Export envirennement variable ---------------
+#ENV LC_ALL=C.UTF-8
+#ENV LANG=C.UTF-8
+## --server.enableCORS False
+#CMD ["streamlit", "run", "--browser.serverAddress", "0.0.0.0", "--server.port", "8888", "project/streamlit_sample.py"]
