@@ -1,6 +1,11 @@
 FROM python:3.7.7-buster
 MAINTAINER Filipe Silva <filipe.dls@gmail.com>
 
+# /bin/zsh
+RUN apt-get update && \
+    apt-get install -y zsh && \
+    wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
+
 #RUN apt-get autoclean
 # Intall gcc and cmake for intalling H3
 RUN apt-get update && \
@@ -45,13 +50,20 @@ RUN pip install --quiet jupyterlab
 # ipython config dir = get_ipython().profile_dir.startup_dir - allows nb imports startup
 COPY .docker_configs/jupyter /root/.jupyter/
 COPY .docker_configs/ipython /root/.ipython/
+#~/.jupyter/lab/user-settings/
 RUN ./setup_scripts/jupyter_extensions_script.sh
 RUN ./setup_scripts/jupyter_tools.sh
 
 # LAUNCH JUPYETR LAB
 WORKDIR jupyter
 EXPOSE 8888
-CMD ["jupyter", "lab", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root", "--NotebookApp.token=''"]
+# Allows to use arrows in the terminal jupyer app
+ENV SHELL=/bin/zsh
+# "--core-mode": no extensions
+# "--NotebookApp.token=''"
+CMD ["jupyter", "lab", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
+
+# cp -r /root/.jupyter/ /app/jupyter/jupyter_backup2
 
 # https://github.com/amineHY/docker-streamlit-app/blob/master/Dockerfile
 # --------------- Configure Streamlit ---------------
