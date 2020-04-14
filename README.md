@@ -7,6 +7,8 @@ Uses `plaidml` to run on GPU.
 Check `.docker_configs/`
  * `.docker_configs/jupyter/jupyter_notebook_config.py` for extensions config, jupyter server config
 
+## extensions activated...
+
 ## 1 Setup
 
     make setup

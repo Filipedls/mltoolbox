@@ -766,6 +766,10 @@ c.NotebookApp.token = 'jupy73r70k3n1a'
 #  By default, all installed kernels are allowed.
 #c.KernelSpecManager.whitelist = set()
 
+# loading extensions
+# c.IPKernelApp.extensions = ['sql', 'jupyternotify', 'autoreload']
+# c.IPKernelApp.exec_lines = ['%autoreload 1']
+
 # install the server extension, and add the following to jupyter_notebook_config.py
 # c.JupyterLabEmail.smtp_servers = [{'name': 'gmail',
 #                                    'domain': 'gmail.com',

@@ -9,8 +9,6 @@ jupyter labextension install @ijmbarr/jupyterlab_spellchecker --no-build
 
 jupyter labextension install @jupyterlab/theme-dark-extension --no-build
 
-pip install --quiet ipywidgets
-
 # NB Resource Usage
 pip install --quiet nbresuse
 jupyter labextension install jupyterlab-topbar-extension jupyterlab-theme-toggle jupyterlab-system-monitor --no-build
@@ -54,8 +52,8 @@ jupyter labextension install @jupyterlab/github --no-build
 pip install --quiet jupyterlab_github
 jupyter serverextension enable --sys-prefix jupyterlab_github
 
-pip install --upgrade jupyterlab-git --quiet
-jupyter serverextension enable --py jupyterlab_git
+#pip install --upgrade jupyterlab-git --quiet
+#jupyter serverextension enable --py jupyterlab_git
 
 #jupyter labextension install @jupyterlab/google-drive --no-build
 
@@ -67,22 +65,14 @@ jupyter labextension install @jupyterlab/debugger --no-build
 
 #jupyter nbextension enable --py --sys-prefix widgetsnbextension
 #pip install gmaps --quiet
-#jupyter nbextension enable --py --sys-prefix gmaps
 #jupyter labextension install @jupyter-widgets/jupyterlab-manager
 
 pip install jupyterlab_templates --quiet
 jupyter labextension install jupyterlab_templates --no-build
 jupyter serverextension enable --py jupyterlab_templates
 
-# jupytext - notebooks on markdown format
-pip install jupytext --upgrade --quiet
-
 # parametrize notebook runs
 pip install papermill --quiet
-
-# to open jupyter_contrib_nbextensions - https://localhost:8888/nbextensions
-pip install jupyter_contrib_nbextensions --quiet
-jupyter contrib nbextension install --system > /dev/null 2>&1
 
 # qgrid - Interactive pandas DataFrames
 pip install qgrid --quiet
@@ -93,7 +83,6 @@ jupyter nbextension enable --py --sys-prefix qgrid
 
 # https://github.com/jupyter-incubator/sparkmagic
 pip install sparkmagic --quiet
-jupyter nbextension enable --py --sys-prefix widgetsnbextension
 jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build
 jupyter serverextension enable --py sparkmagic
 
@@ -112,12 +101,6 @@ ipython profile create && echo "c.InteractiveShellApp.extensions.append('sparkmo
 #jupyter toree install --sys-prefix
 
 #jupyter labextension install jupyterlab_spark --no-build
-
-#pip install jupyter-spark --quiet
-#jupyter serverextension enable --py jupyter_spark
-#jupyter nbextension install --py jupyter_spark
-#jupyter nbextension enable --py jupyter_spark
-#jupyter nbextension enable --py widgetsnbextension
 
 # SQL
 #pip install --quiet jupyterlab_sql

@@ -33,10 +33,11 @@ ipykernel:
 .PHONY: docker
 docker: docker-build docker-run
 
+#  --build-arg jupyter_workdir='start_dir'
 .PHONY: docker-build
 docker-build:
 	docker build -t mltoolbox .
 
 .PHONY: docker-run
 docker-run:
-	docker run -t -i -p8888:8888 -v '$(PWD)':'/app/jupyter/' mltoolbox
+	docker run -t -i -p8888:8888 -v '$(PWD)':'/app/$(notdir $(CURDIR))/' -e JUPYTER_DIR='$(notdir $(CURDIR))' mltoolbox

@@ -4,35 +4,85 @@ version = "0.1.0"
 description = "description"
 readme = "README.md"
 authors = ["dude"]
-packages = [
-  { include = "project"},
-]
+packages = [ { include = "project"}, ]
 
 
 [tool.poetry.dependencies]
 python = "^3.7"
-pandas = ">=0"
-numpy = ">=0"
-matplotlib = ">=0"
-# joblib = "^0.14.1"
-# h3 = "^3.4.3"
-# pandarallel = "^1.4.6"
-# plaidml-keras = "^0.7.0"
-# keras = "^2.2.4"
-# tensorflow = "^2.1.0"
-# Computer Vision
-#opencv-python==4.1.1.26
-#opencv-contrib-python#==4.1.2.30
+
+# # Data Analysis
+pandas = "*"
+pandarallel = "*"
+
+# # Math & Stats
+numpy = "*"
+scipy = "*"
+statsmodels = "*"
+
+# # Vizulizations
+matplotlib = "*"
+seaborn = "*"
+pydot = "*"
+plotly = "*"
+
+# # Pythom utils
+joblib = "*"
+
+# # Geo
+h3 = "*"
+folium = "*"
+geopandas = "*"
+
+# # ML
+scikit-learn = "*"
+xgboost = "*"
+keras = "*"
+#tensorflow = "*"
+#=py3.7_cpu_0 +cpu
+#torch = "*=py3.7_cpu_0"
+#torchvision = "*=py3.7_cpu"
+# PyBrain
+# $ git clone git://github.com/pybrain/pybrain.git
+# $ python setup.py install
+
+# # Model Explainability
+lime = "*"
+eli5 = "*"
+
+# # Data scraping
+beautifulsoup4 = "*"
+scrapy = "*"
+
+# # Computer Vision
+opencv-python = "*"
+opencv-contrib-python = "*"
+scikit-image = "*"
+Pillow = "*"
+
+# # Audio
+librosa = "*"
+madmom = "*"
+
+# # NLP
+spacy = "*"
+nltk = "*"
+
+# # UIs & Dashboards
+kivy = "*"
+dash = "*"
+bokeh = "*"
+
+# # DBs
+sqlalchemy = "*"
 
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.0.1"
+pytest = "^5.0"
 pytest-cov = "^2.7"
 black = "19.3b0"
 pre-commit = "^1.18"
-ipython = "^7.13.0"
-plaidbench = "^0.7.0"
-ipykernel = "^5.2.0"
+ipython = "*"
+ipykernel = "*"
 
 [tool.black]
 line-length = 120
