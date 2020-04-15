@@ -33,7 +33,7 @@
 
 ## A list of dotted module names of IPython extensions to load.
 c.InteractiveShellApp.extensions = ['sql', 'jupyternotify', 'autoreload']
-
+c.InteractiveShellApp.exec_lines = ['%autoreload 1']
 
 ## dotted module name of an IPython extension to load.
 #c.InteractiveShellApp.extra_extension = ''

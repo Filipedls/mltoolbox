@@ -19,13 +19,13 @@ numpy = "*"
 scipy = "*"
 statsmodels = "*"
 
-# # Vizulizations
+# # Visualizations
 matplotlib = "*"
 seaborn = "*"
 pydot = "*"
 plotly = "*"
 
-# # Pythom utils
+# # Python utils
 joblib = "*"
 
 # # Geo
@@ -37,7 +37,8 @@ geopandas = "*"
 scikit-learn = "*"
 xgboost = "*"
 keras = "*"
-#tensorflow = "*"
+tensorflow = "2.1.0"
+tensorflow-estimator = "2.1.0"
 #=py3.7_cpu_0 +cpu
 #torch = "*=py3.7_cpu_0"
 #torchvision = "*=py3.7_cpu"

@@ -116,5 +116,6 @@ ipython profile create && echo "c.InteractiveShellApp.extensions.append('sparkmo
 #jupyter labextension install @jupyterlab/plotly-extension --no-build
 #jupyter labextension install @jpmorganchase/perspective-jupyterlab --no-build
 
+# todo: set configs with cmds??
 
 jupyter lab build --dev-build=False --minimize=False

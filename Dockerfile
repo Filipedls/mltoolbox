@@ -3,6 +3,7 @@ MAINTAINER Filipe Silva <filipe.dls@gmail.com>
 
 ARG jupyter_workdir=jupyter
 ENV JUPYTER_DIR=$jupyter_workdir
+ENV BACKUP_JUP_CONFIG=true
 
 # /bin/zsh
 RUN apt-get update && apt-get install -y zsh && \
@@ -10,6 +11,8 @@ RUN apt-get update && apt-get install -y zsh && \
 
 # Intall gcc and cmake for intalling H3 #RUN apt-get autoclean
 RUN apt-get update && apt-get -y install gcc python3-dev build-essential cmake protobuf-compiler
+
+RUN pip install --upgrade pip
 
 # https://hub.docker.com/r/nikolaik/python-nodejs/ - https://github.com/nikolaik/docker-python-nodejs
 # Install node prereqs, nodejs and yarn
@@ -43,7 +46,6 @@ RUN poetry install --no-interaction --no-ansi
 
 # JUPYTERLAB ==2.1.0
 # dir ref in makefile
-#RUN mkdir $jupyter_workdir
 RUN pip install --quiet jupyterlab
 # ipython config dir = get_ipython().profile_dir.startup_dir - allows nb imports startup
 COPY .docker_configs/jupyter /root/.jupyter/
@@ -54,6 +56,7 @@ RUN ./setup_scripts/jupyternb_extensions_script.sh
 RUN ./setup_scripts/jupyter_extensions_script.sh
 
 # LAUNCH JUPYETR LAB
+#RUN mkdir $jupyter_workdir
 #WORKDIR $jupyter_workdir
 EXPOSE 8888
 # Allows to use arrows in the terminal jupyer app
@@ -61,8 +64,8 @@ ENV SHELL=/bin/zsh
 # "--core-mode": no extensions
 # "--NotebookApp.token=''"
 #CMD ["jupyter", "lab", "--port=8888", "--no-browser", "--ip=0.0.0.0", "--allow-root"]
-CMD ["./entrypoint.sh"]
-# cp -r /root/.jupyter/ /app/jupyter/jupyter_backup
+CMD ["/bin/bash", "./entrypoint.sh"]
+
 
 # https://github.com/amineHY/docker-streamlit-app/blob/master/Dockerfile
 # --------------- Configure Streamlit ---------------
