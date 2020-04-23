@@ -20,3 +20,5 @@ pip install jupytext --upgrade --quiet
 
 # cell magic %%notify that notifies the user upon completion of a cell
 pip install jupyternotify --quiet
+
+

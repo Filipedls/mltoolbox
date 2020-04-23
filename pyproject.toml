@@ -80,7 +80,7 @@ sqlalchemy = "*"
 [tool.poetry.dev-dependencies]
 pytest = "^5.0"
 pytest-cov = "^2.7"
-black = "19.3b0"
+black = "19.10b0"
 pre-commit = "^1.18"
 ipython = "*"
 ipykernel = "*"

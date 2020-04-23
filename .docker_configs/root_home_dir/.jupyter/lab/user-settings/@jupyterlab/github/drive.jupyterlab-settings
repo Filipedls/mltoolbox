@@ -1,0 +1,14 @@
+{
+    // GitHub
+    // @jupyterlab/github:drive
+    // Settings for the GitHub plugin.
+    // *******************************
+
+    // The GitHub Base URL
+    // [missing schema description]
+    "baseUrl": "https://github.com",
+
+    // Default Repository
+    // [missing schema description]
+    "defaultRepo": "Filipedls"
+}

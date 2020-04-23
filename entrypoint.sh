@@ -1,6 +1,9 @@
 #!/bin/sh
 set +e
 
+# Allows to use arrows in the terminal jupyer app
+export SHELL=/bin/zsh
+
 # "--core-mode": no extensions
 # "--NotebookApp.token=''"
 cd $JUPYTER_DIR

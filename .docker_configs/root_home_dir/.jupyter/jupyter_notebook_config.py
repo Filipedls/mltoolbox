@@ -13,7 +13,7 @@
 #c.Application.log_format = '[%(name)s]%(highlevel)s %(message)s'
 
 ## Set the log level by value or name.
-#c.Application.log_level = 30
+c.Application.log_level = 40
 
 #------------------------------------------------------------------------------
 # JupyterApp(Application) configuration
@@ -339,7 +339,7 @@ c.NotebookApp.quit_button = True
 #  
 #  Setting to an empty string disables authentication altogether, which is NOT
 #  RECOMMENDED.
-c.NotebookApp.token = 'jupy73r70k3n1a'
+#c.NotebookApp.token = 'jupy73r70k3n1a'
 
 ## Supply overrides for the tornado.web.Application that the Jupyter notebook
 #  uses.
@@ -777,3 +777,6 @@ c.NotebookApp.token = 'jupy73r70k3n1a'
 # c.JupyterLabTemplates.template_dirs = [] # list_of_template_directories
 c.JupyterLabTemplates.include_default = False
 c.JupyterLabTemplates.include_core_paths = False
+
+# check how to get the token: https://github.com/jupyterlab/jupyterlab-github
+c.GitHubConfig.access_token = '49f3b76e6c00464e86bee0eb5567ef05adbd8ff5'
