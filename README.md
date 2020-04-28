@@ -1,84 +1,85 @@
 # mltoolbox
 
 
-Uses `plaidml` to run on GPU.
+Jupyter docker sandbox for quick prototyping.
 
-## config
-Check `.docker_configs/`
- * `.docker_configs/jupyter/jupyter_notebook_config.py` for extensions config, jupyter server config
+Runs `jupyter lab` in the directory where the docker image is started. All the files are read/write to that dir.
 
-## extensions activated...
+**Includes**
+ * a whole bunch of jupyter pre-configured extensions (might need to do a bit of manual work here :)
+ * a jupyter R kernel
+ * `oh my zsh` jupyter terminal session
+ * `pip` and `conda` to install python and R packages on-the-fly
 
-## 1 Setup
+## Config's
 
-    make setup
+The folder `.docker_configs/` contains all the docker extra configurations.
+In here you will find a `setup_scripts` directory with all the scripts to install the jupyter extras and extensions (+details bellow).
+
+The folder `.docker_configs/root_home_dir` has all the jupyter (including extensions settings), ipython and R settings.
+These all loaded to the docker image via the root user directory, `/root/`.
+
+### - jupyter settings
+
+Check `.docker_configs/root_home_dir/.jupyter`. In here you'll find:
+ * `jupyter_notebook_config.py` file for jupyter server and extensions configurations
+ * `lab/user-settings/@jupyterlab` directory, for extensions settings
+ * `.Rprofile` the common R settings file, used by the jupyter R kernel
+
+Also in `.ipython/profile_default/` you'll find:
+ * `ipython_config.py` where *%magic* extensions are automatically loaded
+ * a `startup` folder where code that runs before every notebook is placed
+
+All the other configuration file are default and haven't been changed.
+
+#### Pre-activated extensions
+
+[list of extensions...]
+
+# Available kernels
+### python kernel
+
+Python version: `3.7.7` (base docker img: *python:3.7.7-buster*)
+
+python kernel libraries/dependencies can be manage in `pyproject.toml`.
+
+(also put python kernel configs here???)
+
+### R kernel
+
+ver
+libs
+configs?
+
+
+## Setup
+### Pre-requisites
+
+just docker :)
+
+### Building the docker image
+
+Build/Run variables:
+ * `jupyter_workdir=jupyter` jupyter starting directory
+ * `BACKUP_JUP_CONFIG=true` flag to backup the jupyter settings
+
+How to:
+build and run:
+
+    make docker
     
-During inhalation you will see:
-```
-PlaidML Setup (0.7.0)
+just build:
 
-Thanks for using PlaidML!
+    make docker-build
 
-The feedback we have received from our users indicates an ever-increasing need
-for performance, programmability, and portability. During the past few months,
-we have been restructuring PlaidML to address those needs.  To make all the
-changes we need to make while supporting our current user base, all development
-of PlaidML has moved to a branch — plaidml-v1. We will continue to maintain and
-support the master branch of PlaidML and the stable 0.7.0 release.
+just run:
 
-Read more here: https://github.com/plaidml/plaidml
+    make docker-run
 
-Some Notes:
-  * Bugs and other issues: https://github.com/plaidml/plaidml/issues
-  * Questions: https://stackoverflow.com/questions/tagged/plaidml
-  * Say hello: https://groups.google.com/forum/#!forum/plaidml-dev
-  * PlaidML is licensed under the Apache License 2.0
+(figure out out to do an alias that runs from any dir???)
 
-
-Default Config Devices:
-   llvm_cpu.0 : CPU (via LLVM)
-   metal_intel(r)_uhd_graphics_630.0 : Intel(R) UHD Graphics 630 (Metal)
-   metal_amd_radeon_pro_560x.0 : AMD Radeon Pro 560X (Metal)
-
-Experimental Config Devices:
-   llvm_cpu.0 : CPU (via LLVM)
-   opencl_amd_radeon_pro_560x_compute_engine.0 : AMD AMD Radeon Pro 560X Compute Engine (OpenCL)
-   metal_intel(r)_uhd_graphics_630.0 : Intel(R) UHD Graphics 630 (Metal)
-   opencl_intel_uhd_graphics_630.0 : Intel Inc. Intel(R) UHD Graphics 630 (OpenCL)
-   metal_amd_radeon_pro_560x.0 : AMD Radeon Pro 560X (Metal)
-
-Using experimental devices can cause poor performance, crashes, and other nastiness.
-
-Enable experimental device support? (y,n)[n]:y
-
-Multiple devices detected (You can override by setting PLAIDML_DEVICE_IDS).
-Please choose a default device:
-
-   1 : llvm_cpu.0
-   2 : opencl_amd_radeon_pro_560x_compute_engine.0
-   3 : metal_intel(r)_uhd_graphics_630.0
-   4 : opencl_intel_uhd_graphics_630.0
-   5 : metal_amd_radeon_pro_560x.0
-
-Default device? (1,2,3,4,5)[1]:5
-
-Selected device:
-    metal_amd_radeon_pro_560x.0
-
-Almost done. Multiplying some matrices...
-Tile code:
-  function (B[X,Z], C[Z,Y]) -> (A) { A[x,y : X,Y] = +(B[x,z] * C[z,y]); }
-Whew. That worked.
-
-Save settings to /Users/filipe/.plaidml? (y,n)[y]:y
-Success!
-```
-
-### 1.1 Run plaidml testing benchmark:
-    make bench
-
-## 2 Utils
-#### Dependencies:
+#### Other cmds (Makefile?):
+    
 Adding new dependencies:
 
     poetry add <pip_package_name>
@@ -87,5 +88,4 @@ Updating all dependencies:
 
     make update
     
-#### Other Makefile cmds:
 

@@ -8,6 +8,7 @@ export SHELL=/bin/zsh
 # "--NotebookApp.token=''"
 cd $JUPYTER_DIR
 echo $JUPYTER_DIR
+# jupyter lab --ip=0.0.0.0 --no-browser --NotebookApp.notebook_dir=~/ --app-dir=~/
 jupyter lab --port=${1:-8888} --no-browser --ip=0.0.0.0 --allow-root
 
 # backing up jupyter settings

@@ -46,6 +46,10 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
     find /opt/conda/ -follow -type f -name '*.js.map' -delete && \
     /opt/conda/bin/conda clean -afy  > /dev/null 2>&1
 
+#RUN useradd -rm -d /home/usrname -s /bin/bash -g root -G sudo -u 1000 usrname
+#RUN echo "usrname ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+#USER usrname
+
 # App  setup
 RUN mkdir /app
 WORKDIR /app
@@ -58,6 +62,7 @@ RUN pip install --quiet poetry
 COPY project ./project
 COPY pyproject.toml README.md poetry.lock entrypoint.sh ./
 RUN poetry config virtualenvs.create false
+#RUN poetry config virtualenvs.in-project true # if virtualenvs.create true
 #RUN poetry update --lock
 #  --no-dev
 RUN poetry install --no-interaction --no-ansi
