@@ -2,5 +2,8 @@
     "rawCellConfig": {
         "lineNumbers": true,
         "codeFolding": true
-    }
+    },
+    // Recording timing
+    // Should timing data be recorded in cell metadata
+    "recordTiming": true
 }

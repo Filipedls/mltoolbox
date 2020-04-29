@@ -2,24 +2,6 @@
 set -e
 set -o xtrace
 
-## Compiling from source:
-#git clone https://github.com/zeromq/zeromq4-x.git libzmq
-#cd libzmq
-#mkdir build
-#cd build
-#cmake ..
-#make install
-#ldconfig
-#
-## R
-##add-apt-repository ppa:chris-lea/zeromq
-##apt-get update
-#apt-get install libcurl4-openssl-dev libssl-dev
-## jupyter-core jupyter-client
-#
-## installing R packages
-#R -e "install.packages(c('repr', 'IRdisplay', 'IRkernel'), type = 'source')"
-#R -e "IRkernel::installspec(user = FALSE)"
 
 # R kernel
 # https://github.com/jupyter/docker-stacks/blob/master/r-notebook/Dockerfile
@@ -33,7 +15,7 @@ apt-get update && \
     r-cran-rodbc \
     gfortran \
     gcc && \
-    rm -rf /var/lib/apt/lists/* > /dev/null 2>&1
+    rm -rf /var/lib/apt/lists/*
 
 conda config --append channels conda-forge
 #wget https://raw.githubusercontent.com/jupyter/docker-stacks/master/base-notebook/fix-permissions -P /usr/local/bin/
@@ -60,8 +42,36 @@ conda install --quiet --yes \
     'r-tidyverse=1.3*' \
     'unixodbc=2.3.*' \
     && \
-    conda clean --all -f -y > /dev/null 2>&1
+    conda clean --all -f -y
 #    fix-permissions $CONDA_DIR
 
 # Install e1071 R package (dependency of the caret R package)
-conda install --quiet --yes r-e1071 > /dev/null 2>&1
+conda install --quiet --yes r-e1071
+
+
+# BASH
+pip install bash_kernel
+python -m bash_kernel.install
+
+# Julia
+# https://github.com/andferrari/julia_notebook/blob/master/Dockerfile
+
+export JULIA_VERSION=1.4.1
+
+mkdir /opt/julia-${JULIA_VERSION} && \
+    cd /tmp && \
+    wget -q https://julialang-s3.julialang.org/bin/linux/x64/`echo ${JULIA_VERSION} | cut -d. -f 1,2`/julia-${JULIA_VERSION}-linux-x86_64.tar.gz && \
+    tar xzf julia-${JULIA_VERSION}-linux-x86_64.tar.gz -C /opt/julia-${JULIA_VERSION} --strip-components=1 && \
+    rm /tmp/julia-${JULIA_VERSION}-linux-x86_64.tar.gz
+
+ln -fs /opt/julia-*/bin/julia /usr/local/bin/julia
+
+# Add packages and precompile
+julia -e 'import Pkg; Pkg.update()' && \
+julia -e 'import Pkg; Pkg.add("Plots"); using Plots' && \
+#    julia -e 'import Pkg; Pkg.add("Distributions"); using Distributions' && \
+#    julia -e 'import Pkg; Pkg.add("Optim"); using Optim' && \
+#    julia -e 'import Pkg; Pkg.add("FFTW"); using FFTW' && \
+    # julia -e 'import Pkg; Pkg.add("StatsPlots"); using StatsPlots' && \
+#    julia -e 'import Pkg; Pkg.add("DSP"); using DSP' && \
+julia -e 'import Pkg; Pkg.add("IJulia"); using IJulia'

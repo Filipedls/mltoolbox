@@ -774,8 +774,8 @@ c.NotebookApp.quit_button = True
 #                                    'port': 465}]
 
 # install the server extension, and add the following to jupyter_notebook_config.py
-# c.JupyterLabTemplates.template_dirs = [] # list_of_template_directories
-c.JupyterLabTemplates.include_default = False
+c.JupyterLabTemplates.template_dirs = ['~/.jupyter/notebook_templates/'] # list_of_template_directories
+c.JupyterLabTemplates.include_default = True
 c.JupyterLabTemplates.include_core_paths = False
 
 # check how to get the token: https://github.com/jupyterlab/jupyterlab-github

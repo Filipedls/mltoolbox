@@ -2,16 +2,17 @@
 set -e
 set -o xtrace
 
-# NS2.1.0
-# jupyter labextension install jupyterlab-drawio --no-build
+jupyter labextension install jupyterlab-drawio --no-build
 
 jupyter labextension install @ijmbarr/jupyterlab_spellchecker --no-build
 
 jupyter labextension install @jupyterlab/theme-dark-extension --no-build
 
+jupyter labextension install jupyterlab-execute-time --no-build
+
 # NB Resource Usage
 pip install --quiet nbresuse
-jupyter labextension install jupyterlab-topbar-extension jupyterlab-theme-toggle jupyterlab-system-monitor --no-build
+jupyter labextension install jupyterlab-topbar-extension jupyterlab-system-monitor jupyterlab-theme-toggle --no-build
 
 # table of contents
 jupyter labextension install @jupyterlab/toc --no-build
@@ -63,20 +64,12 @@ jupyter labextension install @lckr/jupyterlab_variableinspector --no-build
 
 jupyter labextension install @jupyterlab/debugger --no-build
 
-#jupyter nbextension enable --py --sys-prefix widgetsnbextension
-#pip install gmaps --quiet
+# NS2.1.0
 #jupyter labextension install @jupyter-widgets/jupyterlab-manager
 
 pip install jupyterlab_templates --quiet
 jupyter labextension install jupyterlab_templates --no-build
 jupyter serverextension enable --py jupyterlab_templates
-
-# parametrize notebook runs
-pip install papermill --quiet
-
-# qgrid - Interactive pandas DataFrames
-pip install qgrid --quiet
-jupyter nbextension enable --py --sys-prefix qgrid
 
 # NS2.1.0
 #jupyter labextension install jupyterlab_voyager --no-build
@@ -96,27 +89,9 @@ jupyter nbextension enable sparkmonitor --py --user
 jupyter serverextension enable --py --user sparkmonitor
 ipython profile create && echo "c.InteractiveShellApp.extensions.append('sparkmonitor.kernelextension')" >>  $(ipython profile locate default)/ipython_kernel_config.py
 
-# Install Apache Torre Kernel: https://github.com/apache/incubator-toree
-#pip install --no-cache-dir toree --quiet
-#jupyter toree install --sys-prefix
-
-#jupyter labextension install jupyterlab_spark --no-build
-
+# NS2.1.0
 # SQL
 #pip install --quiet jupyterlab_sql
 #jupyter serverextension enable jupyterlab_sql --py --sys-prefix
-
-# pylantern - some exts are not sported on v2.1.0
-#pip install pylantern --quiet
-#jupyter labextension install @jupyter-widgets/jupyterlab-manager --no-build
-#jupyterlab_bokeh - not sup jupyterlab
-#pip install --quiet bokeh jupyter_bokeh
-#jupyter labextension install @bokeh/jupyter_bokeh --no-build
-#jupyter labextension install plotlywidget qgrid ipysheet lineup_widget --no-build
-#jupyter labextension install @jupyterlab/plotly-extension --no-build
-#jupyter labextension install @jpmorganchase/perspective-jupyterlab --no-build
-
-# todo: set configs with cmds??
-
 
 jupyter lab build --dev-build=False --minimize=False

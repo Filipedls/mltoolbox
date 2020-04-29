@@ -3,9 +3,9 @@ set -e
 set -o xtrace
 
 
-jupyter nbextension enable --py --sys-prefix widgetsnbextension
-pip install gmaps --quiet
-jupyter nbextension enable --py --sys-prefix gmaps
+#jupyter nbextension enable --py --sys-prefix widgetsnbextension
+#pip install gmaps --quiet
+#jupyter nbextension enable --py --sys-prefix gmaps
 
 # to open jupyter_contrib_nbextensions - https://localhost:8888/nbextensions
 pip install jupyter_contrib_nbextensions --quiet
